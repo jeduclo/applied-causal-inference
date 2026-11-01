@@ -4,7 +4,9 @@ Specialty course · 8 modules · 80 days · Created by Jean Alegue, PhD
 
 Static Next.js 16 site (React 19, Tailwind 4, Recharts 3). Every day of the course has its own page with:
 a video slot (placeholder until you add a YouTube link), learning outcomes, a "Today's plan" chart,
-the full written lesson, a table of contents, and a download link for the Markdown notes.
+the full written lesson and a table of contents. A sun/moon button in the header switches between
+the dark and the light (mint) background; each visitor's choice is remembered in their browser.
+Nothing on the site can be downloaded.
 
 ---
 
@@ -63,8 +65,8 @@ their "videos published" counters on their own.
 Lessons are released module by module. Days without notes show a "lesson in preparation" page built
 from the day titles in `lib/modules.ts` (`plan: [...]`). To publish new days:
 
-1. Copy the Markdown notes into `public/notes/`, named like `Module1_Days04-07_Ingestion_and_dbt.md`.
-2. Optionally add the matching code as `Module1_Days04-07_code.zip` in the same folder; the module page lists it.
+1. Copy the Markdown notes into `content/notes/`, named like `Module2_Days11-13_Potential_Outcomes.md`.
+2. Keep code zips and other files out of the site: anything in `public/` can be downloaded by visitors.
 3. Run `npm run build`, then commit and push. Those days switch from "Notes soon" to full lessons automatically.
 
 ---
@@ -96,15 +98,17 @@ No environment variables or database are needed: the site is fully static.
 
 | What | Where |
 |---|---|
-| Lesson notes and code (content + downloads) | `public/notes/*.md`, `public/notes/*.zip` |
+| Lesson notes (private, not downloadable) | `content/notes/*.md` |
 | Module titles, colours, topics, tools, day plan, capstones | `lib/modules.ts` |
 | YouTube links (one per day) | `content/videos.ts` |
 | Day page layout | `app/module/[slug]/day/[day]/page.tsx` |
 | Module page layout | `app/module/[slug]/page.tsx` |
 | Home page | `app/page.tsx` |
-| Colours and typography | `app/globals.css` |
+| Colours, light/dark themes, typography | `app/globals.css` |
+| Favicon | `app/icon.svg` |
 
-To edit a lesson, edit its Markdown file in `public/notes` and push. Day pages are built from
+To edit a lesson, edit its Markdown file in `content/notes` and push. These files are only read at
+build time to create the pages; they are not published as files, so students cannot download them. Day pages are built from
 `# DAY N — Title` headings, the time-table rows (`| 0:00 – 0:40 | … |`) and the `### Day N checklist`
 items, so keep those patterns when editing.
 

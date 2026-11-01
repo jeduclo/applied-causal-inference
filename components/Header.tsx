@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { CircleCheck, GraduationCap, House } from "lucide-react";
 import { COURSE, MODULES, TOTAL_DAYS } from "@/lib/modules";
 import { useProgress } from "@/components/ProgressProvider";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Header() {
   const pathname = usePathname();
@@ -15,7 +16,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-30 border-b border-slate-800/80 bg-slate-950/85 backdrop-blur">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6">
-        <div className="flex items-center justify-between gap-4 py-3">
+        <div className="flex items-center gap-4 py-3">
           <Link href="/" className="flex min-w-0 items-center gap-3">
             <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-teal-400 to-indigo-500">
               <GraduationCap size={20} className="text-slate-950" />
@@ -27,7 +28,7 @@ export default function Header() {
               </div>
             </div>
           </Link>
-          <div className="hidden shrink-0 items-center gap-2 text-xs text-slate-400 sm:flex" title="Saved in this browser">
+          <div className="ml-auto hidden shrink-0 items-center gap-2 text-xs text-slate-400 sm:flex" title="Saved in this browser">
             <div className="h-1.5 w-28 overflow-hidden rounded-full bg-slate-800">
               <div
                 className="h-full bg-emerald-400 transition-all"
@@ -35,6 +36,9 @@ export default function Header() {
               />
             </div>
             <span className="tabular-nums">{ready ? done : 0}/{TOTAL_DAYS} days done</span>
+          </div>
+          <div className="ml-auto sm:ml-0">
+            <ThemeToggle />
           </div>
         </div>
 
@@ -57,7 +61,7 @@ export default function Header() {
               <Link
                 key={m.slug}
                 href={`/module/${m.slug}`}
-                style={{ ["--tab" as string]: m.accent }}
+                style={{ ["--tab-base" as string]: m.accent }}
                 aria-current={isActive ? "page" : undefined}
                 className={`flex shrink-0 items-center gap-2 border-b-2 px-3 py-2.5 text-sm transition ${
                   isActive ? "border-[var(--tab)] text-white" : "border-transparent text-slate-400 hover:text-slate-200"

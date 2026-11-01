@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, BookOpen, Clapperboard, FileDown, Hourglass, ListChecks, Target, Trophy, Wrench } from "lucide-react";
+import { ArrowRight, BookOpen, Clapperboard, Hourglass, ListChecks, Target, Trophy, Wrench } from "lucide-react";
 import Inline from "@/components/Inline";
 import Markdown from "@/components/Markdown";
 import { DoneMark, ModuleProgress } from "@/components/CompleteButton";
@@ -29,14 +29,14 @@ export default async function ModulePage({ params }: Params) {
   const { slug } = await params;
   const mod = getModule(slug);
   if (!mod) notFound();
-  const { meta, days, goals, intro, files, code } = mod;
+  const { meta, days, goals, intro } = mod;
   const written = days.filter((d) => d.ready).length;
   const Icon = meta.icon;
   const part = PARTS.find((p) => p.id === meta.part)!;
   const published = publishedCount(days.map((d) => d.number));
 
   return (
-    <div style={{ ["--accent" as string]: meta.accent }} className="space-y-8">
+    <div style={{ ["--accent-base" as string]: meta.accent }} className="space-y-8">
       {/* Module header */}
       <section className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
         <div className="flex min-w-0 gap-4">
@@ -106,21 +106,6 @@ export default async function ModulePage({ params }: Params) {
               <Trophy size={16} className="text-[var(--accent)]" /> Mini-capstone
             </h2>
             <p className="mt-3 text-sm text-slate-300">{meta.capstone}</p>
-          </div>
-          <div className="card p-5">
-            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-100">
-              <FileDown size={16} className="text-[var(--accent)]" /> Lesson notes &amp; code
-            </h2>
-            {files.length === 0 && <p className="mt-3 text-sm text-slate-400">Notes for this module are in preparation.</p>}
-            <ul className="mt-3 space-y-2 text-sm">
-              {[...files, ...code].map((f) => (
-                <li key={f.name}>
-                  <a href={`/notes/${f.name}`} download className="text-slate-300 underline-offset-4 hover:text-white hover:underline">
-                    {f.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>

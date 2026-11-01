@@ -4,7 +4,7 @@ import path from "node:path";
 import { MODULES, moduleForDay, type ModuleMeta } from "@/lib/modules";
 
 /**
- * The course content lives in public/notes/*.md (the same files students can download).
+ * The course content lives in content/notes/*.md (private: never served to visitors).
  * This module parses them at BUILD time: every page is static HTML on Vercel.
  */
 
@@ -43,7 +43,7 @@ export type ModuleContent = {
   days: Day[];
 };
 
-const NOTES_DIR = path.join(process.cwd(), "public", "notes");
+const NOTES_DIR = path.join(process.cwd(), "content", "notes");
 const DAY_HEADING = /^# DAY (\d+) — (.+)$/gm;
 
 export function slugify(text: string) {
@@ -161,7 +161,7 @@ function load() {
       days.push({
         number,
         title,
-        shortTitle: title.split(":")[0].trim(),
+        shortTitle: title,
         module: moduleNo,
         file,
         schedule: parseSchedule(body),

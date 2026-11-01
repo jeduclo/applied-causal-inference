@@ -122,7 +122,7 @@ export default function Home() {
                     <Link
                       key={meta.slug}
                       href={`/module/${meta.slug}`}
-                      style={{ ["--accent" as string]: meta.accent }}
+                      style={{ ["--accent-base" as string]: meta.accent }}
                       className="card group flex flex-col p-5 transition hover:border-[var(--accent)]/60"
                     >
                       <div className="flex items-start gap-3">

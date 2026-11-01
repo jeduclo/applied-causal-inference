@@ -62,7 +62,7 @@ export const MODULES: ModuleMeta[] = [
     number: 2, slug: "dags", title: "Causal Thinking, Estimands & DAGs", short: "DAGs", part: 1,
     firstDay: 11, lastDay: 20, accent: "#38bdf8", icon: Network,
     focus: "Stating the question precisely and making every causal assumption explicit.",
-    tools: ["DoWhy", "NetworkX", "Polars"],
+    tools: ["DoWhy", "NetworkX", "statsmodels", "Polars", "matplotlib"],
     topics: [
       { days: "Days 11–13", text: "Potential outcomes, estimands (ATE, ATT, CATE, LATE) and randomization as the benchmark." },
       { days: "Days 14–17", text: "DAGs, backdoor and frontdoor criteria, colliders and bad controls." },
@@ -80,11 +80,11 @@ export const MODULES: ModuleMeta[] = [
     number: 3, slug: "experiments", title: "Experimentation & A/B Testing", short: "Experiments", part: 1,
     firstDay: 21, lastDay: 30, accent: "#a78bfa", icon: FlaskConical,
     focus: "Designing, running and analysing randomized experiments well.",
-    tools: ["statsmodels", "SciPy", "pyfixest"],
+    tools: ["statsmodels", "SciPy", "Polars", "NumPy"],
     topics: [
       { days: "Days 21–23", text: "Test design, power and sample size, stratified randomization and balance." },
-      { days: "Days 24–27", text: "Regression analysis of experiments, CUPED, multiple testing and peeking." },
-      { days: "Days 28–30", text: "Sequential tests, interference, switchback and geo experiments." },
+      { days: "Days 24–27", text: "Regression analysis, CUPED, multiple testing, peeking and sequential tests." },
+      { days: "Days 28–30", text: "Interference, switchback and geo experiments, and the free-shipping capstone." },
     ],
     plan: [
       "Designing an A/B Test", "Power and Sample Size", "Randomization, Stratification and Balance",
@@ -92,13 +92,13 @@ export const MODULES: ModuleMeta[] = [
       "Sequential Testing", "Interference and Network Effects", "Switchback and Geo Experiments",
       "Capstone: The Free-Shipping Experiment",
     ],
-    capstone: "Free-shipping experiment: pre-register, power, and analyse a test with CUPED and honest intervals.",
+    capstone: "Free-shipping experiment: pre-registered plan, CUPED readout, non-inferiority guardrail and a launch decision by segment.",
   },
   {
     number: 4, slug: "observables-iv", title: "Selection on Observables & Instrumental Variables", short: "Matching & IV",
     part: 2, firstDay: 31, lastDay: 40, accent: "#fbbf24", icon: Scale,
     focus: "Estimating effects without randomization when confounders are measured, or an instrument exists.",
-    tools: ["EconML", "linearmodels", "scikit-learn"],
+    tools: ["statsmodels", "scikit-learn", "linearmodels", "Polars"],
     topics: [
       { days: "Days 31–33", text: "Regression adjustment, propensity scores and matching." },
       { days: "Days 34–36", text: "Inverse probability weighting, overlap and doubly robust (AIPW) estimators." },
@@ -109,13 +109,13 @@ export const MODULES: ModuleMeta[] = [
       "Overlap and Trimming", "Doubly Robust Estimation (AIPW)", "Instrumental Variables: Intuition and 2SLS",
       "Weak Instruments and LATE", "Comparing Estimators", "Capstone: The Loyalty Programme Effect",
     ],
-    capstone: "Loyalty programme effect: compare OLS, AIPW and IV estimates of the effect on 12-month spend.",
+    capstone: "Loyalty programme effect: compare AIPW and IV estimates of the effect on 12-month spend, then decide whether the programme and its $20 invitations pay off.",
   },
   {
     number: 5, slug: "quasi-experiments", title: "Quasi-Experiments: DiD, Synthetic Control, RDD", short: "Quasi-Experiments",
     part: 2, firstDay: 41, lastDay: 50, accent: "#fb7185", icon: ChartLine,
     focus: "Evaluating rollouts and campaigns when you can't randomize.",
-    tools: ["pyfixest", "CausalPy", "PyMC", "rdrobust"],
+    tools: ["pyfixest", "CausalPy", "PyMC", "rdrobust", "rddensity"],
     topics: [
       { days: "Days 41–44", text: "Difference-in-differences, event studies and modern staggered estimators." },
       { days: "Days 45–47", text: "Synthetic control, synthetic DiD and Bayesian structural time series." },
@@ -127,7 +127,7 @@ export const MODULES: ModuleMeta[] = [
       "Bayesian Structural Time Series with CausalPy", "Regression Discontinuity", "Placebo and Falsification Tests",
       "Capstone: Regional Campaign ROI",
     ],
-    capstone: "Regional campaign ROI: staggered DiD and synthetic control, reconciled and stress-tested with placebos.",
+    capstone: "Regional campaign ROI: DiD, synthetic control, synthetic DiD and a Bayesian model, stress-tested with placebos and turned into a profit decision.",
   },
   {
     number: 6, slug: "causal-ml", title: "Causal Machine Learning & Heterogeneity", short: "Causal ML", part: 2,

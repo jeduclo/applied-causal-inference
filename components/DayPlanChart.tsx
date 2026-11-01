@@ -12,7 +12,7 @@ export type PlanBlock = {
 };
 
 // Validated (dataviz palette check) on the dark card surface: blue / orange, plus a neutral for breaks.
-export const KIND_COLORS = { lesson: "#3987e5", project: "#d95926", break: "#475569" } as const;
+export const KIND_COLORS = { lesson: "#3987e5", project: "#d95926", break: "var(--color-slate-600)" } as const;
 export const KIND_LABELS = { lesson: "Lesson", project: "Hands-on project", break: "Break" } as const;
 
 function fmt(min: number) {
@@ -38,21 +38,21 @@ export default function DayPlanChart({ blocks }: { blocks: PlanBlock[] }) {
       <div className="h-[var(--h)] w-full" style={{ ["--h" as string]: `${Math.max(220, data.length * 34 + 40)}px` }}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} layout="vertical" margin={{ top: 4, right: 12, bottom: 4, left: 0 }} barCategoryGap={4}>
-            <CartesianGrid horizontal={false} stroke="#1e293b" />
+            <CartesianGrid horizontal={false} stroke="var(--color-slate-800)" />
             <XAxis
               type="number"
               domain={[0, total]}
               ticks={ticks}
               tickFormatter={(v) => `${v / 60}h`}
-              tick={{ fill: "#94a3b8", fontSize: 11 }}
-              axisLine={{ stroke: "#334155" }}
+              tick={{ fill: "var(--color-slate-400)", fontSize: 11 }}
+              axisLine={{ stroke: "var(--color-slate-700)" }}
               tickLine={false}
             />
             <YAxis
               type="category"
               dataKey="name"
               width={250}
-              tick={{ fill: "#cbd5e1", fontSize: 11.5 }}
+              tick={{ fill: "var(--color-slate-300)", fontSize: 11.5 }}
               axisLine={false}
               tickLine={false}
               interval={0}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronLeft, ChevronRight, Clock, FileDown, Hourglass, ListChecks, Trophy } from "lucide-react";
+import { ChevronLeft, ChevronRight, Clock, Hourglass, ListChecks, Trophy } from "lucide-react";
 import CompleteButton, { DoneMark } from "@/components/CompleteButton";
 import DayPlanChart from "@/components/DayPlanChart";
 import Inline from "@/components/Inline";
@@ -37,7 +37,7 @@ export default async function DayPage({ params }: Params) {
   const topic = topicForDay(d.number);
 
   return (
-    <div style={{ ["--accent" as string]: meta.accent }} className="space-y-6">
+    <div style={{ ["--accent-base" as string]: meta.accent }} className="space-y-6">
       {/* Breadcrumb + day tabs */}
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <nav className="text-sm text-slate-400" aria-label="Breadcrumb">
@@ -164,18 +164,10 @@ export default async function DayPage({ params }: Params) {
                 </li>
               ))}
             </ul>
-            <a href={`/notes/${d.file}`} download className="btn-ghost">
-              <FileDown size={15} /> Download notes
-            </a>
           </div>
         </aside>
         <article className="card min-w-0 p-5 sm:p-8">
-          <div className="mb-2 flex items-center justify-between gap-3">
-            <div className="label">Written lesson</div>
-            <a href={`/notes/${d.file}`} download className="btn-ghost xl:hidden">
-              <FileDown size={15} /> Notes
-            </a>
-          </div>
+          <div className="label mb-2">Written lesson</div>
           <Markdown source={d.markdown} />
         </article>
       </section>

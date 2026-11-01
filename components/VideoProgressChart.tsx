@@ -5,7 +5,7 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxi
 export type VideoRow = { module: string; title: string; published: number; pending: number };
 
 const PUBLISHED = "#3987e5";
-const PENDING = "#334155";
+const PENDING = "var(--color-slate-700)";
 
 /** How many of each module's 10 day-videos are published. Updates automatically from content/videos.ts. */
 export default function VideoProgressChart({ rows }: { rows: VideoRow[] }) {
@@ -14,20 +14,20 @@ export default function VideoProgressChart({ rows }: { rows: VideoRow[] }) {
       <div className="h-[300px] w-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={rows} layout="vertical" margin={{ top: 4, right: 16, bottom: 4, left: 0 }} barCategoryGap={6}>
-            <CartesianGrid horizontal={false} stroke="#1e293b" />
+            <CartesianGrid horizontal={false} stroke="var(--color-slate-800)" />
             <XAxis
               type="number"
               domain={[0, 10]}
               ticks={[0, 2, 4, 6, 8, 10]}
-              tick={{ fill: "#94a3b8", fontSize: 11 }}
-              axisLine={{ stroke: "#334155" }}
+              tick={{ fill: "var(--color-slate-400)", fontSize: 11 }}
+              axisLine={{ stroke: "var(--color-slate-700)" }}
               tickLine={false}
             />
             <YAxis
               type="category"
               dataKey="module"
               width={130}
-              tick={{ fill: "#cbd5e1", fontSize: 12 }}
+              tick={{ fill: "var(--color-slate-300)", fontSize: 12 }}
               axisLine={false}
               tickLine={false}
               interval={0}

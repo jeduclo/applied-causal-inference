@@ -29,7 +29,7 @@ Because the data is simulated, we know the truth: the email raised order frequen
 
 ### Tested versions
 
-Every script in these notes was run on 31 October 2026 with Python 3.13, Polars 2.1.0, DuckDB 2.0.0 and NumPy 2.5.4. Polars 2 and DuckDB 2 changed some functions; if you search the web, older answers may not work. Use the versions in `requirements.txt`.
+Every script in these notes was run on 31 October 2026 with Python 3.13, Polars 2.1.0 and DuckDB 1.5.6 (full list in `requirements.txt`). DuckDB 2.0 exists, but the ingestion tool we use from Day 5 (dlt) does not support it yet, so the whole course stays on 1.5.6. Answers you find online may target other versions; trust the pinned ones.
 
 ### Target folder structure (built up over three days)
 
@@ -166,11 +166,22 @@ Your prompt now starts with `(.venv)`. On Windows (outside Codespaces) the secon
 **Example 2 — Pin the packages.** Create `requirements.txt` in the repository root:
 
 ```text
-# Pinned so every student gets identical results (tested 31 Oct 2026)
+# Pinned so every student gets identical results (tested 31 Oct 2026, Python 3.13)
+# Days 1-3: data wrangling
 polars==2.1.0
-duckdb==2.0.0
+duckdb==1.5.6          # not 2.x yet: dlt (Day 5) supports DuckDB 1.x only
 numpy==2.5.4
 pyarrow==26.0.0
+# Days 4-5: APIs and ingestion
+requests==2.34.2
+fastapi==0.150.0
+uvicorn==0.54.0
+dlt[duckdb]==1.32.0
+# Days 6-7: transformation
+dbt-core==1.12.6
+dbt-duckdb==1.11.1
+# Day 9: orchestration
+prefect==3.9.1
 ```
 
 Install them:
@@ -181,19 +192,38 @@ python -c "import polars, duckdb; print(polars.__version__, duckdb.__version__)"
 ```
 
 ```
-2.1.0 2.0.0
+2.1.0 1.5.6
 ```
 
-**Example 3 — Tell Git what not to save.** Data files are rebuilt from scripts, so they don't belong in Git. Create `.gitignore`:
+The file already lists every package Module 1 needs (dlt, dbt, Prefect…), so you install once today and never wonder later whether your environment matches your classmates'.
+
+**Example 3 — Tell Git what not to save.** Data files are rebuilt from scripts, and secrets must never be shared, so neither belongs in Git. Create `.gitignore` (some lines only matter from Day 4 on):
 
 ```text
+# Environments and caches
 .venv/
 __pycache__/
+
+# Data is rebuilt from code, never committed
 data/raw/
 data/clean/
 data/marts/
+data/api/
+data/published/
 data/*.duckdb
 data/*.duckdb.wal
+
+# Secrets and local state
+.dlt/secrets.toml
+.dlt_pipelines/
+api/clock.txt
+
+# dbt build output
+transform/target/
+transform/logs/
+transform/dbt_packages/
+transform/.user.yml
+logs/
 ```
 
 > Rule of thumb: commit **code** and **documentation**; regenerate **data**. That way the repository *is* the recipe.
@@ -1365,7 +1395,7 @@ clean.products             40 rows
 clean.email_campaign    1,279 rows
 ```
 
-> **DuckDB 2 note.** In DuckDB 2.0, query results no longer have `.fetchone()`. Use `con.sql(...).fetchall()[0][0]` for a single value, as above. Older tutorials online still use `.fetchone()`.
+> **Getting a single value.** `con.sql(...).fetchall()` returns a list of rows, each a tuple, so `[0][0]` is the first column of the first row. This form works in both DuckDB 1.x and 2.x.
 
 > Only one program can write to a DuckDB file at a time. If you get a "lock" error, close other scripts or notebooks that have the database open.
 

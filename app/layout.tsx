@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Header from "@/components/Header";
 import { ProgressProvider } from "@/components/ProgressProvider";
+import { THEME_SCRIPT } from "@/components/ThemeToggle";
 import { COURSE } from "@/lib/modules";
 import "./globals.css";
 
@@ -16,7 +17,10 @@ export const viewport: Viewport = { themeColor: "#020617" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body>
         <ProgressProvider>
           <Header />
