@@ -92,7 +92,7 @@ def world(n: int = 20_000, seed: int = 31, hidden: float = 0.0, overlap: float =
         "tenure_years": tenure, "age": age.astype(np.int16), "mobile": mobile, "engaged": engaged,
         "pre_spend": pre_spend, "pre_orders": pre_orders, "invited": invited,
         "joined": joined.astype(np.int8), "spend": spend,
-        "_y0": y0, "_y1": y1, "_tau": tau, "_ps": ps,
+        "_y0": y0, "_y1": y1, "_tau": tau, "_ps": ps, "_affinity": affinity,
         "_complier": ((joined_if_invited == 1) & (joined_if_not_invited == 0)).astype(np.int8),
     })
 

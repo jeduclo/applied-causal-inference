@@ -133,11 +133,11 @@ export const MODULES: ModuleMeta[] = [
     number: 6, slug: "causal-ml", title: "Causal Machine Learning & Heterogeneity", short: "Causal ML", part: 2,
     firstDay: 51, lastDay: 60, accent: "#34d399", icon: BrainCircuit,
     focus: "Using machine learning to estimate effects in high dimensions and find who responds.",
-    tools: ["DoubleML", "EconML", "LightGBM"],
+    tools: ["DoubleML", "EconML", "LightGBM", "pyfixest"],
     topics: [
-      { days: "Days 51–54", text: "Orthogonalization, cross-fitting and DoubleML for partially linear and interactive models." },
+      { days: "Days 51–54", text: "Orthogonalization, cross-fitting and DoubleML for partially linear, interactive and IV models." },
       { days: "Days 55–57", text: "Meta-learners, causal forests and validating heterogeneous effects." },
-      { days: "Days 58–60", text: "Segment-level price elasticities." },
+      { days: "Days 58–60", text: "Price elasticities with DML and instruments, by segment and category." },
     ],
     plan: [
       "From Prediction to Causal ML", "Neyman Orthogonality and Cross-Fitting", "DoubleML: Partially Linear Models",
@@ -145,15 +145,15 @@ export const MODULES: ModuleMeta[] = [
       "Validating CATEs: RATE, Qini and Calibration", "Price Elasticity Estimation", "Segment-Level Elasticities",
       "Capstone: The Price Elasticity Engine",
     ],
-    capstone: "Price elasticity engine: which customer segments can absorb a 5% price rise?",
+    capstone: "Price elasticity engine: which segments, in which categories, can absorb a 5% price rise without losing gross profit?",
   },
   {
     number: 7, slug: "robustness-decisions", title: "Sensitivity, Robustness & Decisions", short: "Decisions", part: 3,
     firstDay: 61, lastDay: 70, accent: "#fb923c", icon: ShieldCheck,
     focus: "Stress-testing estimates and turning them into targeting policies and choices under uncertainty.",
-    tools: ["DoubleML", "scikit-uplift", "EconML"],
+    tools: ["DoubleML", "EconML", "statsmodels", "SciPy"],
     topics: [
-      { days: "Days 61–63", text: "Sensitivity to hidden confounding, E-values, refutation and specification curves." },
+      { days: "Days 61–63", text: "Sensitivity to hidden confounding, robustness values, E-values, refutation tests and specification curves." },
       { days: "Days 64–66", text: "Uplift modelling, policy learning and cost-benefit analysis." },
       { days: "Days 67–70", text: "Decisions under uncertainty, value of information and the decision memo." },
     ],
@@ -162,17 +162,17 @@ export const MODULES: ModuleMeta[] = [
       "Uplift Modelling", "Policy Learning", "Cost-Benefit Analysis", "Decisions under Uncertainty",
       "The Value of Information", "Writing the Decision Memo", "Capstone: The Targeting Policy",
     ],
-    capstone: "Targeting policy: an uplift-based discount policy versus treat-all and treat-none, with robustness checks.",
+    capstone: "Targeting policy: a learned coupon policy versus treat-all and the current rule, judged on a randomised pilot, with sensitivity checks, a programme NPV and a stop rule.",
   },
   {
     number: 8, slug: "delivery", title: "Decision Intelligence Delivery", short: "Delivery", part: 3,
     firstDay: 71, lastDay: 80, accent: "#e879f9", icon: LayoutDashboard,
     focus: "Putting causal estimates in front of decision-makers as tools they can use.",
-    tools: ["FastAPI", "Streamlit", "Next.js", "Recharts"],
+    tools: ["FastAPI", "Streamlit", "Altair", "pytest"],
     topics: [
-      { days: "Days 71–73", text: "Serving causal models with FastAPI, scenario design and uncertainty for executives." },
-      { days: "Days 74–77", text: "Building, testing and deploying the scenario simulator; monitoring estimates." },
-      { days: "Days 78–80", text: "When to re-run experiments, and the final capstone defence." },
+      { days: "Days 71–73", text: "A versioned parameters file, a scenario API with FastAPI, scenario design and uncertainty for executives." },
+      { days: "Days 74–76", text: "The Streamlit simulator, counterfactual charts, tests, CI, a container and a smoke test." },
+      { days: "Days 77–80", text: "Monitoring for effect drift, when to re-run the experiment, and the final capstone defence." },
     ],
     plan: [
       "Serving Causal Models with FastAPI", "Scenario and What-If Design", "Communicating Uncertainty to Executives",
@@ -180,7 +180,7 @@ export const MODULES: ModuleMeta[] = [
       "Monitoring Estimates over Time", "When to Re-Run the Experiment", "Final Capstone Workshop",
       "Final Capstone Defence",
     ],
-    capstone: "Scenario simulator: pricing and marketing sliders showing projected vs counterfactual revenue.",
+    capstone: "Annual pricing review: detect the drift, rebuild the parameters, run the scenario pack through the API and defend a recommendation against the truth.",
   },
 ];
 
